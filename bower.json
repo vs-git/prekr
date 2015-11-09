@@ -1,0 +1,12 @@
+{
+  "name": "RM Pre-K ver.React",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "react": "~0.14.1"
+  }
+}

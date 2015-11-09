@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="react.js" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/bower_components/react/react-dom.js" />
+        <item url="file://$PROJECT_DIR$/bower_components/react/react.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/bower_components/react/react-dom.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/react/react.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
