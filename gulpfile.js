@@ -11,7 +11,7 @@ gulp.task('scripts', function(done) {
         .pipe(gulpWebpack({
             entry: __dirname + '/app/main.js',
             plugins: [
-                new webpack.optimize.UglifyJsPlugin()
+                //new webpack.optimize.UglifyJsPlugin()
             ],
 
             //watch: true,

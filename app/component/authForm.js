@@ -1,5 +1,7 @@
-import {HTTPRequest, loginFromSession} from '../lib/system';
-import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+//import {HTTPRequest, loginFromSession} from '../lib/system';
+//import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+import {UserActions} from '../action/userActions';
+import {User} from '../store/User';
 
 var ReactPropTypes = React.PropTypes;
 
@@ -33,21 +35,10 @@ var AuthForm = React.createClass({
     _onClick: function(/*object*/ event) {
         //console.log( "AuthForm Button _onClick:" );
         let div = ReactDOM.findDOMNode(this);
-
-        HTTPRequest({
-            url: "/genie2-web/prekserv/um/loginHTTP",
-            data: JSON.stringify({
-                loginName : $(div).children('input[name=loginName]').val(),
-                password : md5($(div).children('input[name=password]').val())
-            })
-        })
-            .then(loginFromSession)
-            .then(renderAIndex)
-            .catch(function(error) {
-                ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+        UserActions.login({
+            loginName : $(div).children('input[name=loginName]').val(),
+            password : md5($(div).children('input[name=password]').val())
         });
- /*
-*/
     }
 });
 

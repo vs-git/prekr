@@ -1,13 +1,6 @@
 import {AuthForm, renderIndex, renderAIndex} from './component/authForm';
-import {loginFromSession} from './lib/system';
-
-function getCookie(name) {
-    var matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
+import {getCookie} from './lib/system';
+import {UserActions} from './action/userActions';
 
 document.addEventListener('DOMContentLoaded', start);
 
@@ -16,7 +9,7 @@ function start() {
     console.log( "getCookie('l'):", getCookie('l') );
 
     if (getCookie('l')) {
-        loginFromSession();
+        UserActions.loginFromSession();
     } else {
         renderIndex();
     }

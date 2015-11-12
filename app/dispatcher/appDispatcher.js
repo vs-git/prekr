@@ -1,4 +1,4 @@
 
-let AppDispatcher = new Dispatcher();
+let AppDispatcher = new Flux.Dispatcher();
 
 export {AppDispatcher};
