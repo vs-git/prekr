@@ -19,10 +19,13 @@ import {HTTPRequest} from '../lib/system';
 var User = {};
 
 /**
- * @param  {Object} options
+ * @param  {Object} loginData
  */
-function login(options) {
-    return HTTPRequest(options);
+function login(loginData) {
+    return HTTPRequest({
+        url:"/genie2-web/prekserv/um/loginHTTP",
+        data:JSON.stringify(loginData)
+    });
 }
 
 
@@ -30,7 +33,6 @@ function loginFromSession() {
     return HTTPRequest({
         url : "/genie2-web/prekserv/um/loginFromSessionHTTP"
     });
-
 }
 
 
@@ -74,9 +76,8 @@ AppDispatcher.register(function(action) {
 
             //ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
             login(action.data)
-            .then(loginFromSession)
-            .then(renderAIndex)
-            .catch(function(error){
+                .then(UserActions.loginFromSession)
+                .catch(function(error){
                     ErrorOutputFactory.getHandler({type:"page"}).fire(error);
                 });
             //TodoStore.emitChange();
@@ -88,7 +89,6 @@ AppDispatcher.register(function(action) {
                 .catch(function(error){
                     ErrorOutputFactory.getHandler({type:"page"}).fire(error);
                 });
-
             break;
 
 

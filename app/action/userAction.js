@@ -10,10 +10,7 @@ var UserActions = {
     login: function(loginData) {
         AppDispatcher.dispatch({
             actionType: UserConst.LOGIN,
-            data: {
-                url:"/genie2-web/prekserv/um/loginHTTP",
-                data:JSON.stringify(loginData)
-            }
+            data: loginData
         });
     },
 
