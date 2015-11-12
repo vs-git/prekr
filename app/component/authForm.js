@@ -39,6 +39,9 @@ var AuthForm = React.createClass({
             loginName : $(div).children('input[name=loginName]').val(),
             password : md5($(div).children('input[name=password]').val())
         });
+        UserActions.loginFromSession();
+        UserActions.renderAIndex();
+
     }
 });
 

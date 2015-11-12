@@ -11,7 +11,7 @@ function HTTPRequest(options) {
         $.ajax($.extend({
             method : "post",
             contentType : 'application/json',
-            dataType : 'json',
+            //dataType : 'json',
             url : '',//"/genie2-web/prekserv/um/loginHTTP",
             data : {},//JSON.stringify(out),
             async : true,
@@ -19,7 +19,7 @@ function HTTPRequest(options) {
 
             success: function (response, textStatus, xhr) {
 
-                if (response.code === undefined || response.code === 0) {
+                if (response.code == undefined || response.code === 0) {
                     console.log( "HTTPRequest OK" );
 
                     setTimeout(function(){

@@ -9,7 +9,7 @@ var CHANGE_EVENT = 'change';
 
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {UserConst} from '../constants/userConst';
-import {renderAIndex} from '../component/authForm';
+import {renderAIndex as renderAIndexPage} from '../component/authForm';
 import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
 import {UserActions} from '../action/userAction';
 import {HTTPRequest} from '../lib/system';
@@ -28,11 +28,14 @@ function login(loginData) {
     });
 }
 
-
 function loginFromSession() {
     return HTTPRequest({
         url : "/genie2-web/prekserv/um/loginFromSessionHTTP"
     });
+}
+
+function renderAIndex() {
+    renderAIndexPage();
 }
 
 
@@ -69,26 +72,41 @@ var UserStore = $.extend({}, /*EventEmitter.prototype,*/ {
 
 // Register callback to handle all updates
 
-AppDispatcher.register(function(action) {
+UserStore.dispatchLoginToken = AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
-        case UserConst.LOGIN:
 
+        case UserConst.LOGIN:
             //ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
-            login(action.data)
-                .then(UserActions.loginFromSession)
-                .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
-                });
+            login(action.data);
             //TodoStore.emitChange();
             break;
 
+        default:
+        // no op
+    }
+});
+UserStore.dispatchLoginFromSessionToken = AppDispatcher.register(function(action) {
+
+    switch(action.actionType) {
+
         case UserConst.LOGIN_FROM_SESSION:
-            loginFromSession()
-                .then(renderAIndex)
-                .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
-                });
+            AppDispatcher.waitFor([UserStore.dispatchLoginToken]);
+            loginFromSession();
+            break;
+
+
+        default:
+        // no op
+    }
+});
+UserStore.dispatchRenderAIndexToken = AppDispatcher.register(function(action) {
+
+    switch(action.actionType) {
+
+        case UserConst.RENDER_AINDEX:
+            AppDispatcher.waitFor([UserStore.dispatchLoginToken,UserStore.dispatchLoginFromSessionToken]);
+            renderAIndex();
             break;
 
 

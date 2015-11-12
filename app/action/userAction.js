@@ -19,6 +19,12 @@ var UserActions = {
         AppDispatcher.dispatch({
             actionType: UserConst.LOGIN_FROM_SESSION
         });
+    },
+
+    renderAIndex: function () {
+        AppDispatcher.dispatch({
+            actionType: UserConst.RENDER_AINDEX
+        });
     }
 
 };

@@ -1,6 +1,7 @@
 let UserConst = {
-    LOGIN : 1,
-    LOGIN_FROM_SESSION : 2
+    LOGIN : "LOGIN",
+    LOGIN_FROM_SESSION : "LOGIN_FROM_SESSION",
+    RENDER_AINDEX : "RENDER_AINDEX"
 };
 
 export {UserConst};
