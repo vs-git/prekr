@@ -7,6 +7,10 @@
   "moduleType": [],
   "dependencies": {
     "jquery": "~2.1.4",
-    "react": "~0.14.1"
+    "react": "~0.14.1",
+    "blueimp-md5": "~1.1.1",
+    "flux": "~2.1.1",
+    "fbemitter": "*",
+    "es6-promise-polyfill": "~1.1.1"
   }
 }
