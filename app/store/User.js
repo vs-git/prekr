@@ -25,8 +25,8 @@ var User = {};
 /**
  * Create a TODO item.
  * @param  {string} text The content of the TODO
-
-function create(text) {
+ */
+function login(text) {
     // Hand waving here -- not showing how this interacts with XHR or persistent
     // server-side storage.
     // Using the current timestamp + random number in place of a real id.
@@ -36,7 +36,7 @@ function create(text) {
         complete: false,
         text: text
     };
-}*/
+}
 
 
 /*

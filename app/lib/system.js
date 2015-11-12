@@ -12,9 +12,13 @@ function HTTPRequest(options) {
 
             success: function (response, textStatus, xhr) {
 
-                if (response.code === 0) {
+                if (response.code==undefined || response.code === 0) {
                     console.log( "HTTPRequest OK" );
-                    resolve(response);
+
+                    setTimeout(function(){
+                        resolve(response);
+                    }, 3000);
+
                     //loginFromSession();
                     //(new AdultLayout).render();
                 } else {

@@ -141,7 +141,7 @@ function renderIndex() {
 
 function renderAIndex() {
     ReactDOM.render(
-        <AuthForm />,
+        <h1>renderAIndex() OK !!! </h1>,
         document.getElementById('content')
     )
 }
