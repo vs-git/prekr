@@ -1,6 +1,6 @@
 import {AuthForm, renderIndex, renderAIndex} from './component/authForm';
 import {getCookie} from './lib/system';
-import {UserActions} from './action/userActions';
+import {UserActions} from './action/userAction';
 
 document.addEventListener('DOMContentLoaded', start);
 

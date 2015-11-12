@@ -11,7 +11,8 @@ import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {UserConst} from '../constants/userConst';
 import {renderAIndex} from '../component/authForm';
 import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
-import {UserActions} from '../action/userActions';
+import {UserActions} from '../action/userAction';
+import {HTTPRequest} from '../lib/system';
 
 //var EventEmitter = fbemitter.EventEmitter;
 
@@ -21,73 +22,15 @@ var User = {};
  * @param  {Object} options
  */
 function login(options) {
-    $.ajax($.extend({
-        method : "post",
-        contentType : 'application/json',
-        dataType : 'json',
-        url : '',//"/genie2-web/prekserv/um/loginHTTP",
-        data : {},//JSON.stringify(out),
-        async : true,
-        cache : false,
-
-        success: function (response, textStatus, xhr) {
-
-            if (response.code==undefined || response.code === 0) {
-                console.log( "HTTPRequest OK" );
-
-                setTimeout(function(){
-                    UserActions.loginFromSession();
-                }, 3000);
-
-                //loginFromSession();
-                //(new AdultLayout).render();
-            } else {
-                // console.log( "HTTPRequest: Wrong response, response.code="+response.code );
-                //renderIndex();
-                ErrorOutputFactory.getHandler({type:"page"}).fire("HTTPRequest: Wrong response, response.code="+response.code);
-            }
-
-        },
-        error : function(xhr, status, errorText){
-            ErrorOutputFactory.getHandler({type:"page"}).fire("HTTPRequest errorText: " + errorText + "; RM-servlet-error: " + xhr.getResponseHeader("RM-servlet-error"));
-
-        }
-    }, options));
+    return HTTPRequest(options);
 }
 
 
-function loginFromSession(options) {
-    $.ajax($.extend({
-        method : "post",
-        contentType : 'application/json',
-        dataType : 'json',
-        url : '',//"/genie2-web/prekserv/um/loginHTTP",
-        data : {},//JSON.stringify(out),
-        async : true,
-        cache : false,
+function loginFromSession() {
+    return HTTPRequest({
+        url : "/genie2-web/prekserv/um/loginFromSessionHTTP"
+    });
 
-        success: function (response, textStatus, xhr) {
-
-            if (response.code==undefined || response.code === 0) {
-                console.log( "HTTPRequest OK" );
-
-                setTimeout(function(){
-                    renderAIndex();
-                }, 3000);
-
-                //loginFromSession();
-                //(new AdultLayout).render();
-            } else {
-                // console.log( "HTTPRequest: Wrong response, response.code="+response.code );
-                //renderIndex();
-                ErrorOutputFactory.getHandler({type:"page"}).fire("HTTPRequest: Wrong response, response.code="+response.code);
-            }
-
-        },
-        error : function(xhr, status, errorText){
-            ErrorOutputFactory.getHandler({type:"page"}).fire("HTTPRequest errorText: " + errorText + "; RM-servlet-error: " + xhr.getResponseHeader("RM-servlet-error"));
-        }
-    }, options));
 }
 
 
@@ -130,12 +73,22 @@ AppDispatcher.register(function(action) {
         case UserConst.LOGIN:
 
             //ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
-            login(action.data);
+            login(action.data)
+            .then(loginFromSession)
+            .then(renderAIndex)
+            .catch(function(error){
+                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                });
             //TodoStore.emitChange();
             break;
 
         case UserConst.LOGIN_FROM_SESSION:
-            loginFromSession(action.data);
+            loginFromSession()
+                .then(renderAIndex)
+                .catch(function(error){
+                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                });
+
             break;
 
 

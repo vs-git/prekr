@@ -1,6 +1,5 @@
 import {AppDispatcher} from '../dispatcher/appDispatcher';
-//var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-//import {} from '../store/appDispatcher';
+import {HTTPRequest} from '../lib/system';
 import {UserConst} from '../constants/userConst';
 
 var UserActions = {
@@ -8,7 +7,7 @@ var UserActions = {
     /**
      * @param  {Object} loginData
      */
-    login: function (loginData) {
+    login: function(loginData) {
         AppDispatcher.dispatch({
             actionType: UserConst.LOGIN,
             data: {
@@ -21,10 +20,7 @@ var UserActions = {
 
     loginFromSession: function () {
         AppDispatcher.dispatch({
-            actionType: UserConst.LOGIN_FROM_SESSION,
-            data: {
-                url : "/genie2-web/prekserv/um/loginFromSessionHTTP"
-            }
+            actionType: UserConst.LOGIN_FROM_SESSION
         });
     }
 

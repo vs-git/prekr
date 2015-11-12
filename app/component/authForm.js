@@ -1,6 +1,6 @@
-//import {HTTPRequest, loginFromSession} from '../lib/system';
+//import {HTTPRequest} from '../lib/system';
 //import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
-import {UserActions} from '../action/userActions';
+import {UserActions} from '../action/userAction';
 import {User} from '../store/User';
 
 var ReactPropTypes = React.PropTypes;
