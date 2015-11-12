@@ -83,6 +83,7 @@ AppDispatcher.register(function(action) {
             //TodoStore.emitChange();
             break;
 
+
         case UserConst.LOGIN_FROM_SESSION:
             loginFromSession()
                 .then(renderAIndex)
