@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b52b9f-bc05-4f70-8e8c-1985ce0511f8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/action/UUserActions.js" />
-      <change type="DELETED" beforePath="C:\work\nginx-1.3.6\html\prekr\.idea\libraries\prekr_node_modules.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\work\nginx-1.3.6\html\prekr\app\lib\ErrorOutputFactory.js" afterPath="$PROJECT_DIR$/app/lib/EErrorOutputFactory.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/lib/functions.jquery.js" afterPath="$PROJECT_DIR$/app/lib/functions.jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prekr.iml" afterPath="$PROJECT_DIR$/prekr.iml" />
+      <change type="DELETED" beforePath="C:\work\nginx-1.3.6\html\prekr\app\action\UUserActions.js" afterPath="" />
+      <change type="MOVED" beforePath="C:\work\nginx-1.3.6\html\prekr\app\lib\EErrorOutputFactory.js" afterPath="$PROJECT_DIR$/app/lib/errorOutputFactory.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="prekr.iws" />
@@ -60,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UUserActions.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/action/UUserActions.js">
+      <file leaf-file-name="errorOutputFactory.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/lib/errorOutputFactory.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.18914185">
-              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -331,24 +328,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="component" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prekr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prekr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="action" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -700,7 +679,7 @@
       <workItem from="1446736683580" duration="44333000" />
       <workItem from="1447255735473" duration="7248000" />
       <workItem from="1447314700231" duration="405000" />
-      <workItem from="1447315280885" duration="219000" />
+      <workItem from="1447315280885" duration="485000" />
     </task>
     <task id="LOCAL-00001" summary="+ login (system, promises)">
       <created>1447314952907</created>
@@ -708,11 +687,17 @@
       <option name="project" value="LOCAL" />
       <updated>1447314952907</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="+ login (system, promises)">
+      <created>1447315579199</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1447315579199</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81811000" />
+    <option name="totallyTimeSpent" value="82077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1044" extended-state="0" />
@@ -759,7 +744,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="+ login" />
     <MESSAGE value="+ login (system, promises)" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ login (system, promises)" />
+    <MESSAGE value="+ login (system, promises)&#10;rename files" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ login (system, promises)&#10;rename files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -796,7 +782,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/EErrorOutputFactory.js">
+    <entry file="file://$PROJECT_DIR$/app/lib/errorOutputFactory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
@@ -862,7 +848,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/EErrorOutputFactory.js">
+    <entry file="file://$PROJECT_DIR$/app/lib/errorOutputFactory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
@@ -1094,14 +1080,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/EErrorOutputFactory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/component/authForm.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1110,10 +1088,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/action/UUserActions.js">
+    <entry file="file://$PROJECT_DIR$/app/lib/errorOutputFactory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18914185">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
           <folding />
         </state>
       </provider>
