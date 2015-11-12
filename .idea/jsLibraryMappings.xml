@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{EventEmitter, flux, jQuery-2.0.0, md5, react.js}" />
+    <file url="PROJECT" libraries="{flux, jQuery-2.0.0, md5, react.js}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
   </component>
 </project>
