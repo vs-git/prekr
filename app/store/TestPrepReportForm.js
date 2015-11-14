@@ -1,31 +1,33 @@
-/*
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
-var TodoConstants = require('../constants/TodoConstants');
-var assign = require('object-assign');
-
-var CHANGE_EVENT = 'change';
-*/
 
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {TestPrepReportFormConst} from '../constants/testPrepReportFormConst';
 
-//import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
-import {TestPrepReportFormActions} from '../action/TestPrepReportFormAction';
+import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+//import {TestPrepReportFormActions} from '../action/TestPrepReportFormAction';
 import {HTTPRequest} from '../lib/system';
+import {RMDate} from '../lib/RMDate';
 
 
 //var EventEmitter = fbemitter.EventEmitter;
 
 var TestPrepReportForm = {};
 
-function setFormData(data) {
+function setModelFromFormData(data) {
     TestPrepReportForm = data;
+    TestPrepReportForm.startDate = new RMDate(data['startDate']);
+    TestPrepReportForm.endDate = new RMDate(data['endDate']);
+    console.log( TestPrepReportForm );
 }
 
 
-function sendRequest() {
-    return HTTPRequest(TestPrepReportForm);
+function sendRequest(data) {
+    setModelFromFormData(data)
+    return HTTPRequest({
+        url:"/genie2-web/prekserv/report/buildTestPrepReport",
+        data:JSON.stringify([TestPrepReportForm])
+    }).catch(function(error){
+        ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+    });
 }
 
 // Register callback to handle all updates
@@ -34,7 +36,7 @@ AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
         case TestPrepReportFormConst.SEND_REQUEST:
-            setFormData(data);
+            sendRequest(action.data);
             break;
 
         default:

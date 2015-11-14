@@ -1,6 +1,7 @@
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 
-import {UserConst} from '../constants/testPrepReportFormConst';
+import {TestPrepReportFormConst} from '../constants/testPrepReportFormConst';
+import {TestPrepReportForm} from '../store/TestPrepReportForm';
 
 var TestPrepReportFormActions = {
 
