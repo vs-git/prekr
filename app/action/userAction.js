@@ -1,5 +1,4 @@
 import {AppDispatcher} from '../dispatcher/appDispatcher';
-import {HTTPRequest} from '../lib/system';
 import {UserConst} from '../constants/userConst';
 
 var UserActions = {

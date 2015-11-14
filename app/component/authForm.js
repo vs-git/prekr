@@ -2,6 +2,7 @@
 //import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
 import {UserActions} from '../action/userAction';
 import {User} from '../store/User';
+import {UserOnline} from '../component/UserOnline';
 
 var ReactPropTypes = React.PropTypes;
 
@@ -35,6 +36,7 @@ var AuthForm = React.createClass({
     _onClick: function(/*object*/ event) {
         //console.log( "AuthForm Button _onClick:" );
         let div = ReactDOM.findDOMNode(this);
+
         UserActions.login({
             loginName : $(div).children('input[name=loginName]').val(),
             password : md5($(div).children('input[name=password]').val())
@@ -83,12 +85,16 @@ var Input = React.createClass({
         onSave: ReactPropTypes.func,//ReactPropTypes.func.isRequired,
         type: ReactPropTypes.string,
         name: ReactPropTypes.string,
-        value: ReactPropTypes.string
+        value: ReactPropTypes.oneOfType([
+            ReactPropTypes.string,
+            ReactPropTypes.number,
+            ReactPropTypes.bool/**/
+        ])
     },
 /**/
     getInitialState: function() {
         return {
-            value: this.props.value || ''
+            value: (typeof this.props.value ==="undefined") ? '' : this.props.value
         };
     },
 
@@ -125,17 +131,14 @@ var Input = React.createClass({
 
 function renderIndex() {
     ReactDOM.render(
-        <AuthForm />,
+        <div>
+            <UserOnline/>
+            <AuthForm />
+        </div>,
         document.getElementById('content')
     )
 }
 
-function renderAIndex() {
-    ReactDOM.render(
-        <h1>renderAIndex() OK !!! </h1>,
-        document.getElementById('content')
-    )
-}
 
-export {AuthForm, renderIndex, renderAIndex};
+export {renderIndex, Input};
 

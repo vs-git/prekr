@@ -22,9 +22,9 @@ function HTTPRequest(options) {
                 if (response.code === undefined || response.code === 0) {
                     console.log( "HTTPRequest OK" );
 
-                    setTimeout(function(){
+                    //setTimeout(function(){
                         resolve(response);
-                    }, 3000);
+                    //}, 1000);
 
                 } else {
                     reject("HTTPRequest: Wrong response, response.code="+response.code);

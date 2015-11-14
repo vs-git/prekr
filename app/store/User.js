@@ -9,10 +9,11 @@ var CHANGE_EVENT = 'change';
 
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {UserConst} from '../constants/userConst';
-import {renderAIndex} from '../component/authForm';
+import {renderAIndex} from '../component/adultPage';
 import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
 import {UserActions} from '../action/userAction';
 import {HTTPRequest} from '../lib/system';
+
 
 //var EventEmitter = fbemitter.EventEmitter;
 
@@ -35,10 +36,46 @@ function loginFromSession() {
     });
 }
 
+function setData(data) {
+    User = data;
+}
+
+// Register callback to handle all updates
+
+AppDispatcher.register(function(action) {
+
+    switch(action.actionType) {
+        case UserConst.LOGIN:
+
+            //ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
+            login(action.data)
+                .then(UserActions.loginFromSession)
+                .catch(function(error){
+                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                });
+            //TodoStore.emitChange();
+            break;
+
+
+        case UserConst.LOGIN_FROM_SESSION:
+            loginFromSession()
+                .then(function(data){
+                    setData(data['user']);
+                })
+                .then(renderAIndex)
+                .catch(function(error){
+                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                });
+            break;
+
+
+        default:
+        // no op
+    }
+});
 
 
 var UserStore = $.extend({}, /*EventEmitter.prototype,*/ {
-
 
    /**
      * Get the entire collection of TODOs.
@@ -65,37 +102,6 @@ var UserStore = $.extend({}, /*EventEmitter.prototype,*/ {
     removeChangeListener: function(callback) {
         this.removeListener(CHANGE_EVENT, callback);
     }*/
-});
-
-// Register callback to handle all updates
-
-AppDispatcher.register(function(action) {
-
-    switch(action.actionType) {
-        case UserConst.LOGIN:
-
-            //ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
-            login(action.data)
-                .then(UserActions.loginFromSession)
-                .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
-                });
-            //TodoStore.emitChange();
-            break;
-
-
-        case UserConst.LOGIN_FROM_SESSION:
-            loginFromSession()
-                .then(renderAIndex)
-                .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
-                });
-            break;
-
-
-        default:
-        // no op
-    }
 });
 
 export {User};
