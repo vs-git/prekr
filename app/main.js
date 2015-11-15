@@ -2,17 +2,20 @@ import {renderIndex} from './component/authForm';
 import {getCookie} from './lib/system';
 import {UserActions} from './action/userAction';
 
+       import {renderAIndex} from './component/adultPage';
+
 document.addEventListener('DOMContentLoaded', start);
 
 function start() {
 
     console.log( "getCookie('l'):", getCookie('l') );
-
+/*
     if (getCookie('l')) {
         UserActions.loginFromSession();
     } else {
         renderIndex();
-    }
+    }*/
+    renderAIndex();
 }
 
 

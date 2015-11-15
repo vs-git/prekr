@@ -37,5 +37,27 @@ function HTTPRequest(options) {
     });
 }
 
+var evt = (function(){
+    var eventNode = $({});
+    return {
+        on: on,
+        off: off,
+        trigger: trigger
+    };
+    function on(){
+        eventNode.on.apply(eventNode, arguments);
+    }
+    function off(){
+        eventNode.off.apply(eventNode, arguments);
+    }
+    function trigger(){
+        eventNode.trigger.apply(eventNode, arguments);
+    }
+})();
 
-export {getCookie, HTTPRequest};
+function percent(x){
+    return x * 100;
+}
+
+
+export {getCookie, HTTPRequest, evt, percent};

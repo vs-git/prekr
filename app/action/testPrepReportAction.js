@@ -1,7 +1,7 @@
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 
 import {TestPrepReportConst} from '../constants/testPrepReportConst';
-import {TestPrepReport} from '../store/TestPrepReport';
+import {TestPrepReportModel} from '../store/TestPrepReport';
 
 var TestPrepReportActions = {
 

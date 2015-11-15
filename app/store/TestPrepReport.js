@@ -4,18 +4,19 @@ import {TestPrepReportConst} from '../constants/testPrepReportConst';
 
 //import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
 //import {TestPrepReportFormActions} from '../action/TestPrepReportFormAction';
-//import {HTTPRequest} from '../lib/system';
+import {evt} from '../lib/system';
 //import {RMDate} from '../lib/RMDate';
 
 
 //var EventEmitter = fbemitter.EventEmitter;
 
-var TestPrepReport = {};
+var TestPrepReportModel = {
+    //students:[]
+};
 
 function setModelData(data) {
-    TestPrepReport = data;
-    console.log( 2222222 );
-    console.log( TestPrepReport );
+    TestPrepReportModel = JSON.parse(data);
+    evt.trigger('change.TestPrepReportModel');
 }
 
 
@@ -65,4 +66,4 @@ var TestPrepReportFormStore = $.extend({}, /*EventEmitter.prototype,*/ {
     }*/
 });
 
-export {TestPrepReport};
+export {TestPrepReportModel};

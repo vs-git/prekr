@@ -1,5 +1,6 @@
 import {Input} from './authForm';
 import {TestPrepReportFormActions} from '../action/TestPrepReportFormAction';
+import {TestPrepReport} from './testPrepReport';
 
 var TestPrepReportForm = React.createClass({
 
@@ -86,7 +87,7 @@ var ReportSheet = React.createClass({
             <div>
                 <TestPrepReportForm/>
                 <hr/>
-                <div id="reportGrid"></div>
+                <TestPrepReport/>
             </div>
         );
     },

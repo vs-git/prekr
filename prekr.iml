@@ -16,5 +16,6 @@
     <orderEntry type="library" name="flux" level="project" />
     <orderEntry type="library" name="EventEmitter" level="project" />
     <orderEntry type="library" name="md5" level="project" />
+    <orderEntry type="library" name="jQuery" level="application" />
   </component>
 </module>

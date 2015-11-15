@@ -1,4 +1,71 @@
+import {evt, percent} from '../lib/system';
+import {TestPrepReportModel} from '../store/TestPrepReport';
 
+var TestPrepReport = React.createClass({
+
+    displayName : 'TestPrepReport',
+
+    getInitialState: function() {
+        return {loaded: false};
+    },
+
+    componentDidMount : function(){
+        evt.on('change.TestPrepReportModel', this._onChange);
+    },
+
+    render: function() {
+        if (this.state.loaded) {
+            return (
+                <table id="testPrepReportTable"><tbody>
+            {this._renderStudents(TestPrepReportModel.students)}
+                </tbody>
+                </table>
+            );
+        } else {
+            return <div className="empty"><p>empty report</p></div>;
+        }
+    },
+
+    _onChange : function(){
+        this.setState({loaded: true})
+    },
+    
+    _renderStudents: function(students){
+        return students.map(this._renderStudent);
+
+    },
+
+    _renderStudent: function(student){
+
+        let cellList = student.cells.map(this._renderStudentCell);
+
+        return (
+            <tr key={student.studentID}>
+                <td> </td>
+                <td>
+                    {student.lastName} {student.firstName }
+                </td>
+                <td> </td>
+                <td>
+                    {Math.round(percent(student.cells[0].ratio))+"%" }
+                </td>
+
+                {cellList}
+            </tr>
+        )
+    },
+
+    _renderStudentCell: function(cell, i){
+        return(
+            <td key={i}>
+                {(cell.ratio===-1?"-":Math.round(percent(cell.ratio))+"%") }
+            </td>
+        )
+    }
+
+});
+
+export {TestPrepReport};
 /*
 
     <%
