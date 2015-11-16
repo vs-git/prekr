@@ -15,7 +15,7 @@ var TestPrepReportModel = {
 };
 
 function setModelData(data) {
-    TestPrepReportModel = JSON.parse(data);
+    TestPrepReportModel = data;
     evt.trigger('change.TestPrepReportModel');
 }
 
