@@ -28,11 +28,6 @@ var TestPrepReport = React.createClass({
     _onChange : function(){
         this.setState({loaded: true})
     },
-    
-    _renderStudents: function(students){
-        return students.map(this._renderStudent);
-
-    },
 
     _renderStudent: function(student){
 
@@ -84,7 +79,19 @@ var TestPrepReport = React.createClass({
         </script>`)
     },
 
+    _renderObjectiveCell: function(cell, tpStandardsHash, i){
+        return(
+            <th key={i} className="sortHeader">
+                {(tpStandardsHash[cell.objectiveID] ? tpStandardsHash[cell.objectiveID].std : "Total" )}
+            </th>
+        )
+    },
 
+    _renderCategoryCell:function(text, colspan, i){
+        return (
+            <th key={i} colSpan={colspan} >{text}</th>
+        )
+    },
 
     _renderTable:function() {
 
@@ -118,6 +125,8 @@ var TestPrepReport = React.createClass({
             }
         }
 
+        let students = TestPrepReportModel.students.map(this._renderStudent);
+
         return(
             <div>
 
@@ -137,23 +146,10 @@ var TestPrepReport = React.createClass({
                         {this._renderTotal(TestPrepReportModel.total)}
                     </thead>
                     <tbody>
-                        {this._renderStudents(TestPrepReportModel.students)}
+                        {students}
                     </tbody>
                 </table>
             </div>
-        )
-    },
-
-    _renderObjectiveCell: function(cell, tpStandardsHash, i){
-        return(
-            <th key={i} className="sortHeader">
-                {(tpStandardsHash[cell.objectiveID] ? tpStandardsHash[cell.objectiveID].std : "Total" )}
-            </th>
-        )
-    },
-    _renderCategoryCell:function(text, colspan, i){
-        return (
-            <th key={i} colSpan={colspan} >{text}</th>
         )
     }
 
