@@ -1,5 +1,5 @@
 import {HTTPRequest} from '../lib/system';
-import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+import {ErrOut} from '../lib/ErrOut';
 
 var UserOnline = React.createClass({
 
@@ -20,9 +20,8 @@ var UserOnline = React.createClass({
                 self.setState({value: data.left})
             })
             .catch(function(error){
-                ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                ErrOut.getHandler({type:"page"}).fire(error);
             });
-        //ULStore.addChangeListener(this._onChange);
     },
 
     getInitialState: function() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/app/lib/errorOutputFactory.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/lib/ErrOut.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/lib/functions.jquery.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/lib/system.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/main.js" charset="UTF-8" />

@@ -1,5 +1,5 @@
 //import {HTTPRequest} from '../lib/system';
-//import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+//import {ErrOut} from '../lib/ErrOut';
 import {UserActions} from '../action/userAction';
 import {User} from '../store/User';
 import {UserOnline} from '../component/UserOnline';

@@ -9,16 +9,17 @@ gulp.task('scripts', function(done) {
     return gulp.src([jsPath])
 
         .pipe(gulpWebpack({
-            entry: __dirname + '/app/main.js',
+            entry: './app/main.js',
             plugins: [
                 //new webpack.optimize.UglifyJsPlugin()
             ],
 
             //watch: true,
             devtool: "source-map",
+            include: /app/,
             module: {
                 loaders: [
-                    { test: /\.js$/, loader: 'babel-loader' }
+                    { test: /\.js$/, include: /app/, loader: 'babel-loader' }
                 ]
             }/**/,
             output: {

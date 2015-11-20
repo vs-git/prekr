@@ -2,7 +2,7 @@ import {$} from './functions.jquery';
 
 let pageErrorSelector = "#error";
 
-let ErrorOutputFactory = (function () {
+let ErrOut = (function () {
 
     /** @private */
     var handlerClass;
@@ -67,4 +67,4 @@ let ErrorOutputFactory = (function () {
     }
 })();
 
-export {ErrorOutputFactory};
+export {ErrOut};

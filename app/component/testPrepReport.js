@@ -4,6 +4,7 @@ import {TestPrepReportModel} from '../store/TestPrepReport';
 var TestPrepReport = React.createClass({
 
     displayName : 'TestPrepReport',
+    tableId : 'testPrepReportTable',
 
     getInitialState: function() {
         return {loaded: false};
@@ -14,7 +15,9 @@ var TestPrepReport = React.createClass({
     },
 
     componentDidUpdate:function(){
-        $('body').append(this._scriptText());
+        if ($("#"+this.tableId).find('script').length === 0) {
+            $("#"+this.tableId).append(this._scriptText());
+        }
     },
 
     render: function() {
@@ -75,7 +78,7 @@ var TestPrepReport = React.createClass({
 
     _scriptText:function(){
         return (`<script type="text/javascript">
-            $("#testPrepReportTable").tablesorter({selectorHeaders : ".sortHeader"});
+            $("#"+this.tableId).tablesorter({selectorHeaders : ".sortHeader"});
         </script>`)
     },
 
@@ -130,7 +133,7 @@ var TestPrepReport = React.createClass({
         return(
             <div>
 
-                <table id="testPrepReportTable">
+                <table id={this.tableId}>
                     <thead>
                     <tr>
                         <th rowSpan="2" >@</th>

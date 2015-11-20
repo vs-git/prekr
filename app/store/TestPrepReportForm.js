@@ -2,7 +2,7 @@
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {TestPrepReportFormConst} from '../constants/testPrepReportFormConst';
 
-import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+import {ErrOut} from '../lib/ErrOut';
 import {TestPrepReportActions} from '../action/TestPrepReportAction';
 import {HTTPRequest} from '../lib/system';
 import {RMDate} from '../lib/RMDate';
@@ -18,15 +18,15 @@ function setModelFromFormData(data) {
     TestPrepReportForm.endDate = new RMDate(data['endDate']);
 }
 
-
+/*
 function sendRequest(data) {
     setModelFromFormData(data);
     return HTTPRequest({
         url:"/genie2-web/prekserv/report/buildTestPrepReport",
         data:JSON.stringify([TestPrepReportForm])
     });
-}
- /*
+}*/
+
 function sendRequest(data) {
     setModelFromFormData(data);
     return new Promise(function(resolve, reject){
@@ -34,7 +34,7 @@ function sendRequest(data) {
         resolve(JSON.parse(data));
     });
 
-}*/
+}
 
 // Register callback to handle all updates
 
@@ -47,7 +47,7 @@ AppDispatcher.register(function(action) {
                     TestPrepReportActions.setFormData(data);
                 })
                 .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                    ErrOut.getHandler({type:"page"}).fire(error);
                 });
             break;
 
@@ -55,7 +55,6 @@ AppDispatcher.register(function(action) {
         // no op
     }
 });
-
 
 var TestPrepReportFormStore = $.extend({}, /*EventEmitter.prototype,*/ {
 

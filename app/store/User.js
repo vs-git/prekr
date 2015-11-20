@@ -10,10 +10,9 @@ var CHANGE_EVENT = 'change';
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {UserConst} from '../constants/userConst';
 import {renderAIndex} from '../component/adultPage';
-import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+import {ErrOut} from '../lib/ErrOut';
 import {UserActions} from '../action/userAction';
 import {HTTPRequest} from '../lib/system';
-
 
 //var EventEmitter = fbemitter.EventEmitter;
 
@@ -51,7 +50,7 @@ AppDispatcher.register(function(action) {
             login(action.data)
                 .then(UserActions.loginFromSession)
                 .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                    ErrOut.getHandler({type:"page"}).fire(error);
                 });
             //TodoStore.emitChange();
             break;
@@ -64,7 +63,7 @@ AppDispatcher.register(function(action) {
                 })
                 .then(renderAIndex)
                 .catch(function(error){
-                    ErrorOutputFactory.getHandler({type:"page"}).fire(error);
+                    ErrOut.getHandler({type:"page"}).fire(error);
                 });
             break;
 

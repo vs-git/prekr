@@ -1,8 +1,7 @@
 
 import {AppDispatcher} from '../dispatcher/appDispatcher';
 import {TestPrepReportConst} from '../constants/testPrepReportConst';
-
-//import {ErrorOutputFactory} from '../lib/ErrorOutputFactory';
+//import {ErrOut} from '../lib/ErrOut';
 //import {TestPrepReportFormActions} from '../action/TestPrepReportFormAction';
 import {evt} from '../lib/system';
 //import {RMDate} from '../lib/RMDate';
