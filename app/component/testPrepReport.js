@@ -14,6 +14,10 @@ var TestPrepReport = React.createClass({
         evt.on('change.TestPrepReportModel', this._onChange);
     },
 
+    componentWillUnmount : function(){
+        evt.off('change.TestPrepReportModel', this._onChange);
+    },
+
     componentDidUpdate:function(){
         if ($("#"+this.tableId).find('script').length === 0) {
             $("#"+this.tableId).append(this._scriptText());

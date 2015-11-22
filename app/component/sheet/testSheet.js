@@ -6,10 +6,10 @@ var TestSheet = React.createClass({
 
     render: function() {
         return (
-            <div>
-                <div > test test test test test</div>
+            <div className={this.props.cssClass}>
+                <div> test test test test test</div>
                 <hr/>
-                <div > test test test test test test test test</div>
+                <div> test test test test test test test test</div>
             </div>
         )
     }

@@ -58,14 +58,10 @@ var evt = (function(){
 function percent(x){
     return x * 100;
 }
-
-
-function trim(str) {
-    return str.replace(/^[\s\xa0]+|[\s\xa0]+$/g, "");
-}
+/*
 // adds the chunk to string, if not exists, for example: str="aaa bbb ccc ddd"; addChunk(str, "bbb"):"aaa bbb ccc ddd"; addChunk(str, "eee"):"aaa bbb ccc ddd eee"
 function addChunk(str, chunk) {
-    let arr = trim(str).split(/\s+/)
+    let arr = str.trim().split(/\s+/)
         , index = arr.indexOf(chunk)
         , out = ''
         , i;
@@ -82,4 +78,22 @@ function addChunk(str, chunk) {
     return out;
 }
 
-export {getCookie, HTTPRequest, evt, percent};
+function delChunk(str, chunk) {
+    let arr = str.trim().split(/\s+/)
+        , index = arr.indexOf(chunk)
+        , out = ''
+        , i;
+
+    if (index !== -1) {
+        arr.splice(index, 1);
+    }
+    for (i = 0; i < arr.length; i++) {
+        if (out.length > 0) {
+            out = out + ' ';
+        }
+        out = out + arr[i];
+    }
+    return out;
+}
+*/
+export {getCookie, HTTPRequest, evt, percent/*, addChunk, delChunk*/};

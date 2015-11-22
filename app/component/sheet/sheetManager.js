@@ -9,46 +9,9 @@ var registry = {
 };
 
 var SheetManager = (function () {
-/*
-    var stickers = '#sheetStickers'; // selector of DOM element, container for sheet stickers
-    var sheets = '#sheets'; // selector of DOM element, container for sheets
-    var menuItemSuffix = 'menuitem';
-*/
+
     var sheetRegistry = {};
     var stickerRegistry = {};
-    /*
-    var stickerTemplate = '<div class="sticker"><span class="bold close">X</span></div>';
-
-    function add(sheetViewName, sheetView) {
-
-        sheetView.html().attr("id", sheetViewName);
-
-        sheetView.render()
-            .then(function(view){
-                $(sheets).append(sheetView.html())
-                sheetView.renderChildren();
-            })
-            .catch(function(error){
-                ErrOut.getHandler({type:'console'}).fire(error);
-            });
-
-        var $sticker = $(stickerTemplate).off('click.shm').on('click.shm', function(e){
-            toFront($.data(e.target, 'sheetId'));
-        });
-        $(stickers).append($sticker);
-        $.data($sticker.get(0), 'sheetId', sheetViewName);
-
-        $sticker.off('mouseenter.shm', '.close').on('mouseenter.shm', '.close', function(e){
-            $(e.target).addClass('mouseEnter');
-        }).off('mouseout.shm', '.close').on('mouseout.shm', '.close', function(e){
-            $(e.target).removeClass('mouseEnter');
-        }).off('click.shm', '.close').on('click.shm', '.close', function(e){
-            del(e);
-        });
-
-        sheetRegistry[sheetViewName] = {hidden:true, component:sheetView};
-        stickerRegistry[sheetViewName] = $sticker;
-    }*/
 
     function Sheet(component){
         this.hidden = true;
@@ -65,12 +28,12 @@ var SheetManager = (function () {
 
     function hide(key){
         sheetRegistry[key]['hidden'] = true;
-        stickerRegistry[key]['active'] = false;
+        stickerRegistry[key] = false;
     }
 
     function show(key){
         sheetRegistry[key]['hidden'] = false;
-        stickerRegistry[key]['active'] = true;
+        stickerRegistry[key] = true;
     }
 
     function setFirstToFront(){
@@ -96,7 +59,8 @@ var SheetManager = (function () {
     return {
         del:del,
         toFront:toFront,
-
+        getSheets:function(){return sheetRegistry},
+        getStickers:function(){return stickerRegistry},
         add : function(sheetName){
 
             var sheetView = registry[sheetName];
@@ -112,10 +76,7 @@ var SheetManager = (function () {
             }
 
             toFront(sheetName);
-        },
-
-        getSheets:function(){return sheetRegistry},
-        getStickers:function(){return stickerRegistry}
+        }
     }
 
 })();

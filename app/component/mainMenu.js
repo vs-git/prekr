@@ -7,34 +7,56 @@ var MainMenu = React.createClass({
 
     displayName : 'MainMenu',
 
-    _menuItemSuffix : 'MenuItem',
-
-    componentDidMount:function(){
-        $('#header .menu').on('click', 'div', function(e){
-            //SheetManager.get( $(e.target).attr('id'));
-
-            this._addSticker($(e.target).attr('id'));
-        }.bind(this));
+    statics: {
+        _actions : {
+            DEL : 'DEL',
+            SELECT : 'SELECT',
+            ADD : 'ADD'
+        }
     },
+
+    _menuItemSuffix : 'MenuItem',
+    _stickerSuffix : 'StickerItem',
 
     getInitialState: function() {
-        return { stickerRegistry: {} };
+        return { stickers: {} };
     },
 
-    _addSticker:function(componentId){
-
-        let componentVarName = componentId.replace(new RegExp(this._menuItemSuffix, 'i'), '');
-
-        SheetManager.add(componentVarName);
-
-        evt.trigger('click.MainMenu');
-    },
-
-    _delSticker:function(){
-        console.log( '_delSticker' );
+    _changeSheets: function(elemId, action) {
+        let componentVarName = elemId.replace(new RegExp('(' + this._menuItemSuffix + '|' + this._stickerSuffix + ')$', 'i'), '');
+        switch (action) {
+            case MainMenu._actions.ADD:
+                SheetManager.add(componentVarName);
+                break;
+            case MainMenu._actions.SELECT:
+                SheetManager.toFront(componentVarName);
+                break;
+            case MainMenu._actions.DEL:
+                SheetManager.del(componentVarName);
+                break;
+        }
+        this.setState({stickers : SheetManager.getStickers()});
+        evt.trigger('click.SheetsChanged');
     },
 
     render: function() {
+        let stickers = [];
+        for (let prop in this.state.stickers) {// this.state.stickers is Object, not Array!!!
+            if (this.state.stickers.hasOwnProperty(prop)) {
+                stickers.push(
+                    React.createElement(
+                        SheetSticker,
+                        {
+                            key : prop,
+                            id : prop + this._stickerSuffix,
+                            cssActive : (this.state.stickers[prop] === true ? 'active' : ''),
+                            onClick : this._changeSheets
+                        }
+                    )
+                );
+            }
+        }
+        if(stickers.length === 0) stickers.push(React.createElement('span', {key:0}));
 
         return (
 
@@ -44,21 +66,20 @@ var MainMenu = React.createClass({
                     <MenuItem
                         id="ReportSheetMenuItem"
                         text="STAAR Report"
+                        onClick={this._changeSheets}
                         />
                     <MenuItem
                         id="TestSheetMenuItem"
                         text="test test"
+                        onClick={this._changeSheets}
                         />
                 </div>
-                <div id="sheetStickers"></div>
+                <div id="sheetStickers">
+                    {stickers}
+                </div>
             </div>
         );
-    },
-
-    loadReport : function(e){
-        //RM.SheetManager.get( $(e.target).attr('id'));
     }
-
 });
 
 var MenuItem = React.createClass({
@@ -74,12 +95,23 @@ var MenuItem = React.createClass({
     propTypes: {
         className: ReactPropTypes.string,
         id: ReactPropTypes.string.isRequired,
-        text: ReactPropTypes.string.isRequired
+        text: ReactPropTypes.string.isRequired,
+        onClick: ReactPropTypes.func.isRequired
+    },
+
+    _onClick : function() {
+        this.props.onClick(this.props.id, MainMenu._actions.ADD);
     },
 
     render: function() {
         return (
-            <div className={this.state.className} id={this.props.id} >{this.props.text}</div>
+            <div
+                className={this.state.className}
+                id={this.props.id}
+                onClick={this._onClick}
+                >
+                {this.props.text}
+            </div>
         );
     }
 
@@ -89,10 +121,40 @@ var SheetSticker = React.createClass({
 
     displayName : 'SheetSticker',
 
+    getDefaultProps: function() {
+        return {
+            cssClass: 'sticker'
+        };
+    },
+
+    propTypes: {
+        cssClass: ReactPropTypes.string.isRequired,
+        cssActive: ReactPropTypes.string,
+        id: ReactPropTypes.string.isRequired,
+        onClick: ReactPropTypes.func.isRequired
+    },
+
+    _onClick : function() {
+        this.props.onClick(this.props.id, MainMenu._actions.SELECT);
+    },
+
+    _onCloseClick : function(e) {
+        e.stopPropagation();
+        this.props.onClick(this.props.id, MainMenu._actions.DEL);
+    },
+
     render: function() {
         return (
-            <div className="sticker">
-                <span className="bold close">X</span>
+            <div
+                className={this.props.cssClass + ' ' + this.props.cssActive}
+                id={this.props.id}
+                onClick={this._onClick}
+                >
+                <span
+                    className="bold close"
+                    onClick={this._onCloseClick}
+                    >X
+                </span>
             </div>
         );
     }

@@ -9,32 +9,36 @@ var AdultPage = React.createClass({
     displayName : 'AdultPage',
 
     componentDidMount:function(){
-        evt.on('click.MainMenu', this._addSheet );
+        evt.on('click.SheetsChanged', this._sheetListChanged);
+    },
+
+    componentWillUnmount:function(){
+        evt.off('click.SheetsChanged', this._sheetListChanged);
     },
 
     getInitialState: function() {
         return { sheets: {}};
     },
 
-    _addSheet : function(){
+    _sheetListChanged : function(){
         this.setState({sheets:SheetManager.getSheets()});
     },
 
     render: function() {
-        console.log( '-----------' );
         let sheets = [];
-        for (let prop in this.state.sheets) {
+        for (let prop in this.state.sheets) { // this.state.sheets is Object, not Array!!!
             if (this.state.sheets.hasOwnProperty(prop)) {
-                console.log( this.state.sheets[prop].isHidden() );
                 sheets.push(
                     React.createElement(
                         this.state.sheets[prop].getComponent(),
-                        {key:prop, cssClass:(this.state.sheets[prop].isHidden()?'hidden':'q')}
+                        {
+                            key : prop,
+                            cssClass : (this.state.sheets[prop].isHidden() ? 'hidden' : '')
+                        }
                     )
                 );
             }
         }
-        if(sheets.length === 0) sheets.push(React.createElement('span', {key:0}));
 
         return (
 
@@ -53,7 +57,6 @@ var AdultPage = React.createClass({
     }
 
 });
-
 
 function renderAIndex() {
     ReactDOM.render(
