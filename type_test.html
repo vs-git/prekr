@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <script type="text/javascript" >
+
+        function first() {this.fa = 1;};
+        first.prototype.set = function(){console.log('set!!!' );}
+
+        //console.log( 'first.prototype', first.prototype );
+        var sec = Object.create(first.prototype);
+
+        //console.log( 'Object.getPrototypeOf(sec ).constructor', Object.getPrototypeOf(sec ).constructor );
+
+        function Model() {this.fa = 1;};
+        Model.create = function(ext){
+
+            console.log('create!!!' );
+            return Object.create(Object.assign(Model.prototype, ext));
+        };
+
+        var a = Array(Model);
+
+        console.log( a[0] === Model);
+
+
+
+        var modelExt = {
+            types: {
+                str: String,
+                num: Number,
+                bool: Boolean,
+                dt : Date//,
+                //ar: Array(String)
+                //ra : Rabbit
+            },
+            values: {
+                str: "strval",
+                num: "0101",
+                bool: "false",
+                dt : 1012556//,
+                //ar: {a:'a ,e'}
+                //ra : Rabbit
+            }
+        };
+
+
+        console.log( new Date(1312556444444) );
+        console.log(  '-------------');
+        console.log( modelExt );
+        //console.log( Model, Model.prototype );
+
+        //var o1, o2, o3;
+        //console.log( o1 = Object.assign(Object.create(Model),modelExt), o1 instanceof Model, Object.getPrototypeOf(o1 ).constructor);
+        //console.log( o2 = Object.assign(Object.create(Model.prototype),modelExt), o2 instanceof Model , Object.getPrototypeOf(o2 ).constructor);
+        //console.log( o3 = Object.create(Object.assign(Model.prototype,modelExt)), o3 instanceof Model , Object.getPrototypeOf(o3 ).constructor);
+        //console.log( o3 = Object.assign(new Model,modelExt),  o3  instanceof Model, Object.getPrototypeOf(o3 ).constructor);
+
+        //var NM = Model.create(modelExt);
+        //console.log( NM, NM instanceof Model , Object.getPrototypeOf(NM ).constructor);
+
+        var TypeParser = (function(){
+
+            function testFalseString(val){
+                return !(new RegExp('^false$', 'i').test(val));
+            }
+
+            function typify(values, types){
+                for (var prop in values) {
+                    if (values.hasOwnProperty(prop)) {
+                        switch (types[prop]) {
+                            case Boolean:
+                                values[prop] = types[prop](testFalseString(values[prop]));
+                                break;
+                            case String:
+                            case Number:
+                                values[prop] = types[prop](values[prop]);
+                                break;
+                            case Date:
+                                values[prop] = new types[prop](values[prop]);//new!!!
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return {
+                typify : typify
+            }
+
+        })();
+
+        console.log( modelExt.values );
+        TypeParser.typify(modelExt.values, modelExt.types);
+        console.log( modelExt.values );
+
+
+
+        /*
+         function first() {this.fa = 1;};
+         first.prototype.set = function(){console.log('set!!!' );}
+
+         var f = Object.create(first);
+
+         var s = Object.create(first.prototype);
+
+         console.log( (f instanceof first) );
+         console.log( 'f.prototype', f.prototype  );
+         console.log( 'f', f , typeof f );
+         console.log(  's.prototype', s.prototype  );
+         console.log(  's', s , typeof s );
+         console.log(  'first.prototype', first.prototype  );
+         console.log(  'first', first , typeof first );
+
+         //console.log(  Object.getPrototypeOf(s.prototype ).constructor  );
+
+         var a= Object.getPrototypeOf(s ).constructor;
+         console.log( 'Object.getPrototypeOf(f ).constructor', Object.getPrototypeOf(f ).constructor );
+
+         console.log( 'Object.getPrototypeOf(s ).constructor', Object.getPrototypeOf(s ).constructor );
+
+         var c = Object.getPrototypeOf(s ).constructor;
+
+         console.log(new c );
+
+         */
+    </script>
+
+
+</head>
+<body>
+<div id="error"></div>
+<div id="content"></div>
+</body>
+</html>
