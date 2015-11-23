@@ -19,8 +19,9 @@ var TestPrepReport = React.createClass({
     },
 
     componentDidUpdate:function(){
-        if ($("#"+this.tableId).find('script').length === 0) {
-            $("#"+this.tableId).append(this._scriptText());
+        let componentNode = ReactDOM.findDOMNode(this);
+        if ($(componentNode).find('script').length === 0) {
+            $(componentNode).append(this._scriptText(this.tableId));
         }
     },
 
@@ -80,10 +81,10 @@ var TestPrepReport = React.createClass({
         )
     },
 
-    _scriptText:function(){
-        return (`<script type="text/javascript">
-            $("#"+this.tableId).tablesorter({selectorHeaders : ".sortHeader"});
-        </script>`)
+    _scriptText:function(tableId){
+        return ('<script type="text/javascript">\
+            $(' + tableId + ').tablesorter({selectorHeaders : ".sortHeader"});\
+        </script>')
     },
 
     _renderObjectiveCell: function(cell, tpStandardsHash, i){

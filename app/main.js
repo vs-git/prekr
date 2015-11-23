@@ -9,13 +9,14 @@ document.addEventListener('DOMContentLoaded', start);
 function start() {
 
     console.log( "getCookie('l'):", getCookie('l') );
-
+/*
     if (getCookie('l')) {
         UserActions.loginFromSession();
     } else {
         renderIndex();
     }
-
+*/
+    renderAIndex();
 }
 
 
