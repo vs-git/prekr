@@ -83,7 +83,7 @@ var TestPrepReport = React.createClass({
 
     _scriptText:function(tableId){
         return ('<script type="text/javascript">\
-            $(' + tableId + ').tablesorter({selectorHeaders : ".sortHeader"});\
+            $("' + '#' + tableId + '").tablesorter({selectorHeaders : ".sortHeader"});\
         </script>')
     },
 
