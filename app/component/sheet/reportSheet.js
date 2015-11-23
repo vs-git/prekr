@@ -16,7 +16,7 @@ var ReportSheet = React.createClass({
         return (
             <div className={this.props.cssClass}>
                 <TestPrepReportForm/>
-                <hr/>AAAAAAAAAAAA
+                <hr/>
                 <TestPrepReport/>
             </div>
         );

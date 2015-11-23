@@ -17,15 +17,15 @@ function setModelFromFormData(data) {
     TestPrepReportForm.startDate = new RMDate(data['startDate']);
     TestPrepReportForm.endDate = new RMDate(data['endDate']);
 }
-/*
+
 function sendRequest(data) {
     setModelFromFormData(data);
     return HTTPRequest({
         url:"/genie2-web/prekserv/report/buildTestPrepReport",
         data:JSON.stringify([TestPrepReportForm])
     });
-}*/
-
+}
+/*
 function sendRequest(data) {
     setModelFromFormData(data);
     return new Promise(function(resolve, reject){
@@ -33,7 +33,7 @@ function sendRequest(data) {
         resolve(JSON.parse(data));
     });
 }
-
+*/
 // Register callback to handle all updates
 
 AppDispatcher.register(function(action) {
